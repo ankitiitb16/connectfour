@@ -1,0 +1,6 @@
+Requirements
+
+
+1. Two Players taking turns and dropping disc to 7x6 Board
+2. Game ends when player places four disc in horizontal, vertical or diagonal direction
+3. Reject illegal moves like player playing out of turns
