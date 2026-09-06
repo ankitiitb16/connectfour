@@ -4,6 +4,7 @@ import com.machinecoding.connectfour.ConnectfourApplication;
 import com.machinecoding.connectfour.enums.GameState;
 
 import java.util.Arrays;
+import java.util.Stack;
 
 public class Game {
     private Player player1;
@@ -12,6 +13,7 @@ public class Game {
     private Player winner;
     private Board board;
     private GameState state;
+    Stack<Move> moveHistory;
 
 
     public Game(Player player1, Player player2, int rows, int cols) {
@@ -20,6 +22,7 @@ public class Game {
         board = new Board(rows, cols);
         state = GameState.IN_PROGRESS;
         currentPlayer = player1;
+        moveHistory = new Stack<>();
     }
 
     public boolean getBoard(){
@@ -66,5 +69,19 @@ public class Game {
 
     public Player getWinner() {
         return winner;
+    }
+
+    public boolean pushMove(Player player, int row, int col){
+        moveHistory.push(new Move(player, row, col));
+        return true;
+    }
+
+    public boolean undoMove(){
+        Move move = moveHistory.pop();
+        currentPlayer = move.getPlayer();
+        int row = move.getRow();
+        int col = move.getCol();
+        board.clearCell(row, col);
+        return true;
     }
 }
